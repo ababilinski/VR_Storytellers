@@ -16,10 +16,16 @@ public class SceneController : MonoBehaviour {
     }
 
    public Coroutine LoadScene(string sceneName) {
-        return StartCoroutine(LoadSceneCoroutine(sceneName));
-       
-    }
+        if (Application.CanStreamedLevelBeLoaded(sceneName))
+            return StartCoroutine(LoadSceneCoroutine(sceneName));
+        else
+            return StartCoroutine(SkipFrame());
 
+
+    }
+    IEnumerator SkipFrame() {
+        yield return new WaitForEndOfFrame();
+    }
 
     IEnumerator LoadSceneCoroutine(string sceneName) {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
