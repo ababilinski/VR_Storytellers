@@ -14,11 +14,13 @@ public class SceneSetUp : MonoBehaviour {
     float clippingMax;
     public UnityEvent onDoneLoadingScene;
     int camCount;
+    Story story;
 	// Use this for initialization
 	void Start () {
         CameraInit();
-
-
+    }
+    public void SetUp(Story data) {
+        story = data;
     }
 
     void CameraInit() {
@@ -49,6 +51,12 @@ public class SceneSetUp : MonoBehaviour {
         }
     }
 
+    void LoadCharacter() {
+        var Character = Instantiate(story.sceneObjects[0], characterSpawnPoint.position,characterSpawnPoint.rotation) as GameObject;
+    }
+    void LoadMusic() {
+        Debug.Log("TODO: Play " + story.mood + " Music.");
+    }
     // Update is called once per frame
     void Update () {
 	
