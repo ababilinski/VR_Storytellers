@@ -1,0 +1,357 @@
+fileFormatVersion: 2
+guid: 9e9c8c5bbda655a48b36b528b5561630
+timeCreated: 1464223449
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: curve3
+    100002: curve4
+    100004: curve5
+    100006: curve9
+    100008: //RootNode
+    100010: follicle1
+    100012: follicle2
+    100014: follicle3
+    100016: follicle4
+    100018: GEO
+    100020: GEO1
+    100022: GEO2
+    100024: joint1
+    100026: joint10
+    100028: joint11
+    100030: joint12
+    100032: joint13
+    100034: joint14
+    100036: joint15
+    100038: joint16
+    100040: joint17
+    100042: joint18
+    100044: joint19
+    100046: joint2
+    100048: joint2 1
+    100050: joint20
+    100052: joint21
+    100054: joint22
+    100056: joint23
+    100058: joint24
+    100060: joint25
+    100062: joint26
+    100064: joint27
+    100066: joint28
+    100068: joint29
+    100070: joint3
+    100072: joint3 1
+    100074: joint30
+    100076: joint31
+    100078: joint32
+    100080: joint33
+    100082: joint34
+    100084: joint35
+    100086: joint36
+    100088: joint37
+    100090: joint38
+    100092: joint39
+    100094: joint4
+    100096: joint4 1
+    100098: joint40
+    100100: joint5
+    100102: joint5 1
+    100104: joint6
+    100106: joint7
+    100108: joint8
+    100110: joint9
+    100112: nurbsCircle1
+    100114: pCone1
+    100116: pCone2
+    100118: polySurface3
+    400000: curve3
+    400002: curve4
+    400004: curve5
+    400006: curve9
+    400008: //RootNode
+    400010: follicle1
+    400012: follicle2
+    400014: follicle3
+    400016: follicle4
+    400018: GEO
+    400020: GEO1
+    400022: GEO2
+    400024: joint1
+    400026: joint10
+    400028: joint11
+    400030: joint12
+    400032: joint13
+    400034: joint14
+    400036: joint15
+    400038: joint16
+    400040: joint17
+    400042: joint18
+    400044: joint19
+    400046: joint2
+    400048: joint2 1
+    400050: joint20
+    400052: joint21
+    400054: joint22
+    400056: joint23
+    400058: joint24
+    400060: joint25
+    400062: joint26
+    400064: joint27
+    400066: joint28
+    400068: joint29
+    400070: joint3
+    400072: joint3 1
+    400074: joint30
+    400076: joint31
+    400078: joint32
+    400080: joint33
+    400082: joint34
+    400084: joint35
+    400086: joint36
+    400088: joint37
+    400090: joint38
+    400092: joint39
+    400094: joint4
+    400096: joint4 1
+    400098: joint40
+    400100: joint5
+    400102: joint5 1
+    400104: joint6
+    400106: joint7
+    400108: joint8
+    400110: joint9
+    400112: nurbsCircle1
+    400114: pCone1
+    400116: pCone2
+    400118: polySurface3
+    2300000: pCone1
+    2300002: pCone2
+    3300000: pCone1
+    3300002: pCone2
+    4300000: polySurface3
+    4300002: pCone1
+    4300004: pCone2
+    4300006: GEO
+    4300008: GEO1
+    4300010: GEO2
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: GEO
+    13700002: GEO1
+    13700004: GEO2
+    13700006: polySurface3
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 34
+      lastFrame: 135
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: GEO
+        weight: 1
+      - path: GEO1
+        weight: 1
+      - path: GEO2
+        weight: 1
+      - path: nurbsCircle1
+        weight: 1
+      - path: nurbsCircle1/joint27
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint2
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint2/joint3
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint2/joint3/joint4
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint2/joint3/joint4/joint5
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint11
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint11/follicle4
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint11/follicle4/curve9
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint11/joint12
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint11/joint12/joint13
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint11/joint12/joint13/joint14
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint11/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint16
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint16/follicle2
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint16/follicle2/curve4
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint16/joint17
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint16/joint17/joint18
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint16/joint17/joint18/joint19
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint16/joint17/joint18/joint19/joint20
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint21
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint21/follicle3
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint21/follicle3/curve5
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint21/joint22
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint21/joint22/joint23
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint21/joint22/joint23/joint24
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/joint21/joint22/joint23/joint24/joint25
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/pCone1
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint10/pCone2
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint37
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint37/joint38
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint37/joint38/joint39
+        weight: 1
+      - path: nurbsCircle1/joint27/joint1/joint9/joint8/joint37/joint38/joint39/joint40
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint2 1
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint2 1/joint3 1
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint2 1/joint3 1/joint4
+          1
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint2 1/joint3 1/joint4
+          1/joint5 1
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint28
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint28/follicle1
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint28/follicle1/curve3
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint28/joint29
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint28/joint29/joint30
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint28/joint29/joint30/joint31
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint28/joint29/joint30/joint31/joint32
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint33
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint33/joint34
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint33/joint34/joint35
+        weight: 1
+      - path: nurbsCircle1/joint27/joint26/joint7/joint6/joint33/joint34/joint35/joint36
+        weight: 1
+      - path: polySurface3
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
