@@ -14,13 +14,18 @@ public class MainController : MonoBehaviour {
     private List<GameObject> sceneObjects = new List<GameObject>();
     [SerializeField]
     private string jsonURL;
+    [SerializeField]
+    private string testJson;
 
     public UnityEvent onJsonSuccessful;
     public UnityEvent onCreatedStory;
 	// Use this for initialization
 	void Start () {
         IsVerbose = isVerbose;
-        StartCoroutine(RequestURL(jsonURL));
+        if (string.IsNullOrEmpty(testJson))
+            StartCoroutine(RequestURL(jsonURL));
+        else
+            TestJson(testJson);
 	}
 
     IEnumerator RequestURL(string url) {
@@ -43,7 +48,9 @@ public class MainController : MonoBehaviour {
         onJsonSuccessful.Invoke();
         var dict = Json.Deserialize(jsonResponse) as Dictionary<string, object>;
         var story = (Dictionary<string, object>) dict["Story"];
-        var storyObjects = (List<string>) story["ObjectArray"];
+
+        var storyObjects =  story["ObjectArray"] as string[];
+
 
         if (storyObjects == null && IsVerbose)
             Debug.LogWarning("No Story Objects found");
@@ -60,14 +67,45 @@ public class MainController : MonoBehaviour {
             currentStory = new Story(story["Description"] as string,
                 float.Parse(story["Time"] as string),
                 story["Mood"] as string,
-                story["Location"] as string, objectList);
+                story["Location"] as string, 
+                objectList);
             }
         onCreatedStory.Invoke();
 
 
         }
 
+    void TestJson(string json) {
+        var jsonResponse = json;
+        if (IsVerbose)
+            print(jsonResponse);
+        onJsonSuccessful.Invoke();
+        var dict = Json.Deserialize(jsonResponse) as Dictionary<string, object>;
+        var story = (Dictionary<string, object>) dict["Story"];
 
+        var storyObjects = story["ObjectArray"] as string[];
+
+
+        if (storyObjects == null && IsVerbose)
+            Debug.LogWarning("No Story Objects found");
+        if (storyObjects != null && sceneObjects == null && IsVerbose)
+            Debug.LogWarning("No Scene Objects found in Main Controller");
+
+        if (storyObjects != null && sceneObjects != null) {
+            List<GameObject> objectList = new List<GameObject>();
+            foreach (string objectName in storyObjects) {
+                var item = sceneObjects.Find(e => e.name == objectName);
+                if (item != null)
+                    objectList.Add(item);
+            }
+            currentStory = new Story(story["Description"] as string,
+                float.Parse(story["Time"] as string),
+                story["Mood"] as string,
+                story["Location"] as string,
+                objectList);
+        }
+        onCreatedStory.Invoke();
+    }
     
 
 
