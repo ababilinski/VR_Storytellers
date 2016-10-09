@@ -15,6 +15,6 @@ public class Story {
         this.mood = mood;
         this.location = location;
         this.sceneObjects = sceneObjects;
-        this.PositionOffset = Vector3.right * 3;
+        this.PositionOffset = Vector3.zero;
     }
 }
