@@ -97,14 +97,14 @@ public class Client : MonoBehaviour {
         onJsonSuccessful.Invoke();
         var dict = Json.Deserialize(jsonResponse) as Dictionary<string, object>;
         var story = (Dictionary<string, object>) dict["Story"];
-        if (currentStory != null) {
-            var d = story["Description"] as string;
-            if (d.Equals(currentStory.discription))
-                return;
-        }
+      
         List<string> storyObjects = new List<string>();
         foreach (object item in (List<object>)story["ObjectArray"]) {
             storyObjects.Add(item.ToString());
+        }
+
+        if (currentStory != null &&(currentStory.sceneObjects.Count == storyObjects.Count && currentStory.sceneObjects[0].name.Equals(storyObjects[0]) )) {
+                return;
         }
 
         if (storyObjects == null && IsVerbose)
