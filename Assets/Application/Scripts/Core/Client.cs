@@ -63,6 +63,7 @@ public class Client : MonoBehaviour {
         if (storyObjects != null && sceneObjects != null) {
             List<GameObject> objectList = new List<GameObject>();
             foreach (string objectName in storyObjects) {
+                Debug.Log(objectName);
                 var item = sceneObjects.Find(e => e.name == objectName);
                 if (item != null)
                     objectList.Add(item);
@@ -92,7 +93,7 @@ public class Client : MonoBehaviour {
 
         List<string> storyObjects = new List<string>();
         foreach (object item in (List<object>)story["ObjectArray"]) {
-            storyObjects.Add(item as string);
+            storyObjects.Add(item.ToString());
         }
 
         if (storyObjects == null && IsVerbose)
@@ -104,7 +105,8 @@ public class Client : MonoBehaviour {
         if (storyObjects != null && sceneObjects != null) {
            
             foreach (string objectName in storyObjects) {
-                var item = sceneObjects.Find(e => e.name == objectName);
+
+                var item = sceneObjects.Find(e => e.name.Equals(objectName));
                 if (item != null)
                     objectList.Add(item);
             }
