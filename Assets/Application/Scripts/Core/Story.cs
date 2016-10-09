@@ -19,6 +19,8 @@ public class Story {
             mood = "Angry";
         if (mood.Equals("Sadness"))
             mood = "Sad";
+        if (mood.Equals("Fear"))
+            mood = "Sad";
 
         this.discription = discription;
         this.time = time;

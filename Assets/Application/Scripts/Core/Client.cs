@@ -36,7 +36,7 @@ public class Client : MonoBehaviour {
         while (true) {
             if (startTracking) {
 
-                yield return new WaitForSeconds(10);
+                yield return new WaitForSeconds(6);
                 if (string.IsNullOrEmpty(testJson))
                     StartCoroutine(RequestURL(jsonURL));
                 else
@@ -80,16 +80,19 @@ public class Client : MonoBehaviour {
             if (CheckWords.StringContains(storyObjects[i], "desert", StringComparison.CurrentCultureIgnoreCase)) {
                 CorrectLocation = "Desert";
                 storyObjects.Remove(storyObjects[i]);
+               break;
             }
             if (CheckWords.StringContains(storyObjects[i], "forest", StringComparison.CurrentCultureIgnoreCase)) { 
                 CorrectLocation = "Forest";
                 storyObjects.Remove(storyObjects[i]);
-                }
+                break;
+            }
             if (CheckWords.StringContains(storyObjects[i], "house", StringComparison.CurrentCultureIgnoreCase)) {
                 CorrectLocation = "House";
                     storyObjects.Remove(storyObjects[i]);
+                break;
 
-                }
+            }
         }
         string mood = story["Mood"] as string;
         if (mood.Equals("Joy"))
@@ -97,6 +100,8 @@ public class Client : MonoBehaviour {
         if (mood.Equals("Anger"))
             mood = "Angry";
         if (mood.Equals("Sadness"))
+            mood = "Sad";
+        if (mood.Equals("Fear"))
             mood = "Sad";
 
         if (currentStory != null && ( currentStory.sceneObjects.Count == storyObjects.Count && currentStory.sceneObjects[0].name.Equals(storyObjects[0]) ) && 
