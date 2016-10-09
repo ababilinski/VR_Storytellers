@@ -17,9 +17,13 @@ IGvrGazeResponder {
     bool Clicked;
     [SerializeField]
     UnityEvent onClick;
+    [SerializeField]
+    Image button;
+    [SerializeField]
+    Color StartColor;
 	// Use this for initialization
 	void Start () {
-	
+        button = GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
@@ -39,6 +43,7 @@ IGvrGazeResponder {
             textUI.text = "Reading Story...";
             if(onClick!=null)
             onClick.Invoke();
+            button.color = StartColor;
             Clicked = true;
         }
 	}
