@@ -5,7 +5,7 @@ public class SceneSetUp : MonoBehaviour {
     [SerializeField]
     Transform playerSpawnPoint;
     [SerializeField]
-    Transform characterSpawnPoint;
+    Transform[] objectSpawnPoints;
     [SerializeField]
     AudioSource audioFocus;
     [SerializeField]
@@ -18,7 +18,10 @@ public class SceneSetUp : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         CameraInit();
-  
+
+        if(audioFocus)
+        SoundController.Instance.source = audioFocus;
+
     }
     public void SetUp(Story data) {
         story = data;
@@ -59,14 +62,20 @@ public class SceneSetUp : MonoBehaviour {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.transform.position = playerSpawnPoint.position;
         }
-        if(characterSpawnPoint !=null)
+        if(objectSpawnPoints.Length >0)
         for (int i = 0; i < story.sceneObjects.Count; i++) {
-            var Character = Instantiate(story.sceneObjects[i], characterSpawnPoint.position + story.PositionOffset + characterSpawnPoint.right*i, characterSpawnPoint.rotation) as GameObject;
+                if (objectSpawnPoints.Length - 1 >= i) {
+                    Transform pos = objectSpawnPoints[i];
+                    var Character = Instantiate(story.sceneObjects[i], pos.position , pos.rotation) as GameObject;
+                }
+                else
+                    break;
         }
 
     }
     void LoadMusic() {
-        Debug.Log("TODO: Play " + story.mood + " Music.");
+        SoundController.Instance.Play(story.mood);
+        
     }
     // Update is called once per frame
     void Update () {

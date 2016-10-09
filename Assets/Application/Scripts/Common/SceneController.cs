@@ -31,7 +31,7 @@ public class SceneController : MonoBehaviour {
     }
 
     IEnumerator LoadSceneCoroutine(string sceneName) {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         while (!operation.isDone) {
             yield return new WaitForEndOfFrame();
         }

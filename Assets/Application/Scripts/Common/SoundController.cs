@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[RequireComponent(typeof(BgmManager))]
 public class SoundController : MonoBehaviour {
 
     public static SoundController Instance {
@@ -21,13 +21,19 @@ public class SoundController : MonoBehaviour {
             return instance;
         }
     }
+    private BgmManager bgmManager;
     public AudioSource source;
     private static SoundController instance;
 
-    // Use this for initialization
-    void Start () {
-	
-	}
+    public void Play(string clip) {
+        if(source)
+        BgmManager.Instance.transform.position = source.transform.position;
+
+        BgmManager.Instance.GetComponent<AudioSource>().spatialBlend = 1;
+        BgmManager.Instance.GetComponent<AudioSource>().spread = 360;
+        BgmManager.Instance.Play(clip);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
