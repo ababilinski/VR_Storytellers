@@ -75,15 +75,36 @@ public class Client : MonoBehaviour {
         foreach (object item in (List<object>) story["ObjectArray"]) {
             storyObjects.Add(item.ToString());
         }
+        string CorrectLocation = "";
+        for(int i=0; i< storyObjects.Count; i++){
+            if (CheckWords.StringContains(storyObjects[i], "desert", StringComparison.CurrentCultureIgnoreCase)) {
+                CorrectLocation = "Desert";
+                storyObjects.Remove(storyObjects[i]);
+            }
+            if (CheckWords.StringContains(storyObjects[i], "forest", StringComparison.CurrentCultureIgnoreCase)) { 
+                CorrectLocation = "Forest";
+                storyObjects.Remove(storyObjects[i]);
+                }
+            if (CheckWords.StringContains(storyObjects[i], "house", StringComparison.CurrentCultureIgnoreCase)) {
+                CorrectLocation = "House";
+                    storyObjects.Remove(storyObjects[i]);
 
+                }
+        }
+        string mood = story["Mood"] as string;
+        if (mood.Equals("Joy"))
+            mood = "Happy";
+        if (mood.Equals("Anger"))
+            mood = "Angry";
+        if (mood.Equals("Sadness"))
+            mood = "Sad";
 
         if (currentStory != null && ( currentStory.sceneObjects.Count == storyObjects.Count && currentStory.sceneObjects[0].name.Equals(storyObjects[0]) ) && 
-            currentStory.location.Equals(story["Location"] as string)) {
+            currentStory.location.Equals(CorrectLocation)) {
             StopCoroutine("RequestURL");
             yield return null;
         }
-        else if (currentStory != null && currentStory.location == (story["Mood"] as string) && currentStory.sceneObjects.Count == storyObjects.Count &&
-            currentStory.location.Equals(story["Location"] as string)) {
+        else if (currentStory != null && currentStory.location == CorrectLocation  && currentStory.mood == mood) {
             StopCoroutine("RequestURL");
             yield return null;
         }
@@ -105,10 +126,15 @@ public class Client : MonoBehaviour {
                 }
 
             }
+            string setting = "";
+            if (CheckWords.StringContains(story["Description"] as string, "day", StringComparison.CurrentCultureIgnoreCase))
+                setting = "Day";
+            else if (CheckWords.StringContains(story["Description"] as string, "night", StringComparison.CurrentCultureIgnoreCase))
+                setting = "Night";
             currentStory = new Story(story["Description"] as string,
-                  float.Parse(story["Time"] as string),
+                  0,
                   story["Mood"] as string,
-                  story["Location"] as string, story["Setting"] as string,
+                  CorrectLocation, setting,
                   objectList);
             onCreatedStory.Invoke(currentStory);
         }
