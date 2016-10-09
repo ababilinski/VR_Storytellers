@@ -18,9 +18,12 @@ public class SceneSetUp : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         CameraInit();
+  
     }
     public void SetUp(Story data) {
         story = data;
+        LoadCharacter();
+        LoadMusic();
     }
 
     void CameraInit() {
@@ -52,7 +55,15 @@ public class SceneSetUp : MonoBehaviour {
     }
 
     void LoadCharacter() {
-        var Character = Instantiate(story.sceneObjects[0], characterSpawnPoint.position,characterSpawnPoint.rotation) as GameObject;
+        if (playerSpawnPoint != null) {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = playerSpawnPoint.position;
+        }
+        if(characterSpawnPoint !=null)
+        for (int i = 0; i < story.sceneObjects.Count; i++) {
+            var Character = Instantiate(story.sceneObjects[i], characterSpawnPoint.position + story.PositionOffset + characterSpawnPoint.right*i, characterSpawnPoint.rotation) as GameObject;
+        }
+
     }
     void LoadMusic() {
         Debug.Log("TODO: Play " + story.mood + " Music.");
