@@ -25,8 +25,14 @@ public class SceneSetUp : MonoBehaviour {
     }
     public void SetUp(Story data) {
         story = data;
+        LoadSetting();
         LoadCharacter();
         LoadMusic();
+        if (playerSpawnPoint != null) {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.position = playerSpawnPoint.position;
+            player.transform.rotation = playerSpawnPoint.rotation;
+        }
     }
 
     void CameraInit() {
@@ -58,10 +64,6 @@ public class SceneSetUp : MonoBehaviour {
     }
 
     void LoadCharacter() {
-        if (playerSpawnPoint != null) {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.transform.position = playerSpawnPoint.position;
-        }
         if(objectSpawnPoints.Length >0)
         for (int i = 0; i < story.sceneObjects.Count; i++) {
                 if (objectSpawnPoints.Length - 1 >= i) {
@@ -76,6 +78,14 @@ public class SceneSetUp : MonoBehaviour {
     void LoadMusic() {
         SoundController.Instance.Play(story.mood);
         
+    }
+    void LoadSetting() {
+        if (story.setting.Equals("Night")) {
+            var Suns = FindObjectsOfType<Light>();
+            for (int i = 0; i < Suns.Length; i++) {
+                Suns[i].transform.localRotation = Quaternion.AngleAxis(-90, Vector3.right);
+            }
+        }
     }
     // Update is called once per frame
     void Update () {

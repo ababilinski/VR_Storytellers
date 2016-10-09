@@ -15,20 +15,28 @@ public class Client : MonoBehaviour {
     private static bool IsVerbose;
     [SerializeField]
     private List<GameObject> sceneObjects = new List<GameObject>();
-    [SerializeField]
-    private string jsonURL;
-    [SerializeField]
-    private string testJson;
+    
+    public string jsonURL;
+    
+    public string testJson;
 
     public UnityEvent onJsonSuccessful;
     public CreatedStoryEvent onCreatedStory;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Awake() {
         IsVerbose = isVerbose;
-        if (string.IsNullOrEmpty(testJson))
-            StartCoroutine(RequestURL(jsonURL));
-        else
-            TestJson(testJson);
+    }
+	IEnumerator Start () {
+
+        while (true) {
+            yield return new WaitForSeconds(10);
+            if (string.IsNullOrEmpty(testJson))
+                StartCoroutine(RequestURL(jsonURL));
+            else
+                TestJson(testJson);
+
+            yield return 0;
+        }
 	}
 
     IEnumerator RequestURL(string url) {
@@ -68,13 +76,12 @@ public class Client : MonoBehaviour {
                 if (item != null)
                     objectList.Add(item);
             }
-            var test = story["Description"] as byte[];
-            print("hello");
-            currentStory = new Story("hjgj" ,
-                float.Parse(story["Time"] as string),
-                story["Mood"] as string,
-                story["Location"] as string, 
-                objectList);
+       
+            currentStory = new Story(story["Description"] as string,
+                 float.Parse(story["Time"] as string),
+                 story["Mood"] as string,
+                 story["Location"] as string, story["Setting"] as string,
+                 objectList);
             onCreatedStory.Invoke(currentStory);
         }
        
@@ -90,7 +97,11 @@ public class Client : MonoBehaviour {
         onJsonSuccessful.Invoke();
         var dict = Json.Deserialize(jsonResponse) as Dictionary<string, object>;
         var story = (Dictionary<string, object>) dict["Story"];
-
+        if (currentStory != null) {
+            var d = story["Description"] as string;
+            if (d.Equals(currentStory.discription))
+                return;
+        }
         List<string> storyObjects = new List<string>();
         foreach (object item in (List<object>)story["ObjectArray"]) {
             storyObjects.Add(item.ToString());
@@ -115,7 +126,7 @@ public class Client : MonoBehaviour {
         currentStory = new Story(story["Description"] as string,
               float.Parse(story["Time"] as string),
               story["Mood"] as string,
-              story["Location"] as string,
+              story["Location"] as string, story["Setting"] as string,
               objectList);
         onCreatedStory.Invoke(currentStory);
 

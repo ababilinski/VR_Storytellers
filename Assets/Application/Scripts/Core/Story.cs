@@ -7,14 +7,16 @@ public class Story {
     public float time { get; private set; }
     public string mood { get; private set; }
     public string location { get; private set; }
+    public string setting { get; private set; }
     public List<GameObject> sceneObjects { get; private set; }
     public Vector3 PositionOffset { get; private set; }
-    public Story(string discripion, float time, string mood, string location, List<GameObject> sceneObjects) {
+    public Story(string discripion, float time, string mood, string location, string setting, List<GameObject> sceneObjects) {
         this.discription = discription;
         this.time = time;
         this.mood = mood;
         this.location = location;
         this.sceneObjects = sceneObjects;
+        this.setting = setting;
         this.PositionOffset = Vector3.zero;
     }
 }

@@ -16,7 +16,7 @@ public class MainController : MonoBehaviour {
         
     }
     IEnumerator LoadCorrectLevel(string level) {
-        yield return new  WaitForSeconds(10f);
+        yield return new  WaitForSeconds(0f);
         yield return SceneController.Loader.LoadScene(level);
         LoadOtherObjects();
 
