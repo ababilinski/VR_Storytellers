@@ -35,7 +35,7 @@ public class Client : MonoBehaviour {
 
         while (true) {
             if (startTracking) {
-
+                //TODO: have a call from the website so that we do not constantly communicate to the json
                 yield return new WaitForSeconds(6);
                 if (string.IsNullOrEmpty(testJson))
                     StartCoroutine(RequestURL(jsonURL));
@@ -76,6 +76,8 @@ public class Client : MonoBehaviour {
             storyObjects.Add(item.ToString());
         }
         string CorrectLocation = "";
+
+        // TODO: Move to diffrent json object
         for(int i=0; i< storyObjects.Count; i++){
             if (CheckWords.StringContains(storyObjects[i], "desert", StringComparison.CurrentCultureIgnoreCase)) {
                 CorrectLocation = "Desert";
@@ -94,6 +96,7 @@ public class Client : MonoBehaviour {
 
             }
         }
+        //TODO: Add more emotions and adjust current spelling to match Watson API
         string mood = story["Mood"] as string;
         if (mood.Equals("Joy"))
             mood = "Happy";
@@ -145,50 +148,6 @@ public class Client : MonoBehaviour {
         }
     }
 
-    //Story ReadStoryText(string storyText) {
-    //    string setting = "";
-    //    string Mood="";
-    //    string location="";
-    //    //Setting
-    //    if (storyText.Contains("forest")) {
-    //        location = "Forest";
-    //    }
-    //    else if (storyText.Contains("desert")) {
-    //        location = "desert";
-    //    }
-    //    else if (storyText.Contains("house")) {
-    //        location = "House";
-    //    }
-    //    //Mood
-    //    if (storyText.Contains("sad")) {
-    //        Mood = "Sad";
-    //    }
-    //    else if (storyText.Contains("happy"))
-    //        Mood = "Happy";
-    //    else if (storyText.Contains("relaxed"))
-    //        Mood = "Relaxed";
-    //    else if (storyText.Contains("angry") || storyText.Contains("barking"))
-    //        Mood = "Angry";
-
-    //    //Setting
-    //    if (storyText.Contains("day")) {
-    //        setting = "Day";
-    //    }
-    //    else if (storyText.Contains("night")) {
-    //        setting = "Night";
-    //    }
-    //    List<GameObject> obj = new List<GameObject>();
-    //    foreach (GameObject thing in sceneObjects) {
-    //        if (Contains(storyText, thing.name, StringComparison.CurrentCultureIgnoreCase)){
-    //            obj.Add(thing);
-    //        }
-    //    }
-    //    return new Story(storyText, 1, Mood, location, setting, obj);
-    //}
-    //public  bool Contains(string source, string toCheck, StringComparison comp) {
-    //    return source != null && toCheck != null && source.IndexOf(toCheck, comp) >= 0;
-    //}
-
 
 
     void TestJson(string json) {
@@ -209,7 +168,7 @@ public class Client : MonoBehaviour {
                 return;
         }
        
-        //UseThisToReadText
+        //Use This To Read Text over json
         //currentStory = CheckWords.createStory(story["Description"] as string);
         //onCreatedStory.Invoke(currentStory);
         //return;

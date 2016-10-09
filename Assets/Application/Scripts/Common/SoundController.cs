@@ -26,9 +26,7 @@ public class SoundController : MonoBehaviour {
     private static SoundController instance;
 
     public void Play(string clip) {
-        if(source)
-        BgmManager.Instance.transform.position = source.transform.position;
-
+      
         BgmManager.Instance.GetComponent<AudioSource>().spatialBlend = 1;
         BgmManager.Instance.GetComponent<AudioSource>().spread = 360;
         BgmManager.Instance.Play(clip);
