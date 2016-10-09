@@ -15,7 +15,7 @@ public class JsonChanger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetMouseButtonDown(0)) {
             currentJsonIndex = currentJsonIndex<jsonFiles.Length-1 ? currentJsonIndex+ 1 :0;
             currentJson = jsonFiles[currentJsonIndex];
             client.testJson = currentJson;

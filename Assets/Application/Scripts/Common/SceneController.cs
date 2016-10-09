@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour {
         if (Application.CanStreamedLevelBeLoaded(sceneName))
             return StartCoroutine(LoadSceneCoroutine(sceneName));
         else {
-            Debug.LogError("The scene:" + sceneName + " is not found");
+            Debug.LogWarning("The scene:" + sceneName + " is not found");
             return StartCoroutine(SkipFrame());
 
         }

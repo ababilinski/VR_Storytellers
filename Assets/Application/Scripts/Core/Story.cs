@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
 [System.Serializable]
 public class Story {
     public string discription { get; private set; }
@@ -10,7 +12,14 @@ public class Story {
     public string setting { get; private set; }
     public List<GameObject> sceneObjects { get; private set; }
     public Vector3 PositionOffset { get; private set; }
-    public Story(string discripion, float time, string mood, string location, string setting, List<GameObject> sceneObjects) {
+    public Story(string discripion = "", float time = 0, string mood="", string location="", string setting="", List<GameObject> sceneObjects = null) {
+        if (mood.Equals("Joy"))
+            mood = "Happy";
+        if (mood.Equals("Anger"))
+            mood = "Angry";
+        if (mood.Equals("Sadness"))
+            mood = "Sad";
+
         this.discription = discription;
         this.time = time;
         this.mood = mood;
@@ -19,4 +28,7 @@ public class Story {
         this.setting = setting;
         this.PositionOffset = Vector3.zero;
     }
+
+
+
 }

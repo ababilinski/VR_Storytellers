@@ -134,7 +134,11 @@ public class BgmManager : MonoBehaviour
 		/// <param name="bgmName">BGM名</param>
 		public void Play (string bgmName)
 		{
+        if (string.IsNullOrEmpty(bgmName))
+            return;
+
 				if (!this.AudioClipDict.ContainsKey (bgmName)) {
+            Debug.Log(bgmName);
 						Debug.LogError (string.Format ("BGM名[{0}]が見つかりません。", bgmName));  
 						return;
 				}
