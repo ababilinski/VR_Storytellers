@@ -13,14 +13,7 @@ public class Story {
     public List<GameObject> sceneObjects { get; private set; }
     public Vector3 PositionOffset { get; private set; }
     public Story(string discripion = "", float time = 0, string mood="", string location="", string setting="", List<GameObject> sceneObjects = null) {
-        if (mood.Equals("Joy"))
-            mood = "Happy";
-        if (mood.Equals("Anger"))
-            mood = "Angry";
-        if (mood.Equals("Sadness"))
-            mood = "Sad";
-        if (mood.Equals("Fear"))
-            mood = "Sad";
+        mood = ConvertMood(mood);
 
         this.discription = discription;
         this.time = time;
@@ -29,6 +22,19 @@ public class Story {
         this.sceneObjects = sceneObjects;
         this.setting = setting;
         this.PositionOffset = Vector3.zero;
+    }
+   
+    public static string ConvertMood(string mood) {
+        if (mood.Equals("Joy", StringComparison.CurrentCultureIgnoreCase))
+            mood = "Happy";
+        if (mood.Equals("Anger", StringComparison.CurrentCultureIgnoreCase))
+            mood = "Angry";
+        if (mood.Equals("Sadness", StringComparison.CurrentCultureIgnoreCase))
+            mood = "Sad";
+        if (mood.Equals("Fear", StringComparison.CurrentCultureIgnoreCase) || mood.Equals("Disgust", StringComparison.CurrentCultureIgnoreCase))
+            mood = "Sad";
+
+        return mood;
     }
 
 
