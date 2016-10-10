@@ -24,6 +24,7 @@ public class Client : MonoBehaviour {
 
     public UnityEvent onJsonSuccessful;
     public CreatedStoryEvent onCreatedStory;
+    public UnityEvent onStoryNotFound;
     Coroutine jsonGrab = null;
     // Use this for initialization
     public void StartTracking(bool on) {
@@ -99,51 +100,60 @@ public class Client : MonoBehaviour {
 
             }
         }
-        //TODO: Add more emotions and adjust current spelling to match Watson API
-        string mood = Story.ConvertMood(story["Mood"] as string);
-
-        if (storyObjects == null && IsVerbose)
-            Debug.LogWarning("No Story Objects found");
-
-        if (storyObjects != null && sceneObjects == null && IsVerbose)
-            Debug.LogWarning("No Scene Objects found in Main Controller");
-        List<GameObject> objectList = new List<GameObject>();
-        if (storyObjects != null && sceneObjects != null) {
-
-            foreach (string objectName in storyObjects) {
-
-                var item = sceneObjects.Find(e => e.name.Equals(objectName, StringComparison.CurrentCultureIgnoreCase));
-                if (item != null)
-                    objectList.Add(item);
-            }
-
-            if (currentStory != null &&
-            ( currentStory.sceneObjects.Count == objectList.Count && currentStory.sceneObjects[0] == objectList[0] ) &&
-            currentStory.location.Equals(CorrectLocation) && currentStory.mood == mood) {
-                jsonGrab = null;
-                yield return jsonGrab;
-               
-               
-            }
-            else {
-                ////Why was it Passed
-                //if (currentStory != null) {
-                //    Debug.Log(currentStory.sceneObjects.Count == objectList.Count);
-                //    Debug.Log(currentStory.sceneObjects[0] == objectList[0]);
-                //    Debug.Log(currentStory.location.Equals(CorrectLocation));
-                //    Debug.Log(currentStory.mood == mood);
-                //}
+        if (string.IsNullOrEmpty(CorrectLocation)) {
+            jsonGrab = null;
+            yield return jsonGrab;
+            onStoryNotFound.Invoke();
+        }
+        else {
 
 
+            //TODO: Add more emotions and adjust current spelling to match Watson API
+            string mood = Story.ConvertMood(story["Mood"] as string);
 
-                string setting = "Day";
-                if (CheckWords.StringContains(story["Description"] as string, "day", StringComparison.CurrentCultureIgnoreCase))
-                    setting = "Day";
-                else if (CheckWords.StringContains(story["Description"] as string, "night", StringComparison.CurrentCultureIgnoreCase))
-                    setting = "Night";
-                currentStory = new Story(story["Description"] as string, 0, mood, CorrectLocation, setting, objectList);
-                onCreatedStory.Invoke(currentStory);
-                jsonGrab = null;
+            if (storyObjects == null && IsVerbose)
+                Debug.LogWarning("No Story Objects found");
+
+            if (storyObjects != null && sceneObjects == null && IsVerbose)
+                Debug.LogWarning("No Scene Objects found in Main Controller");
+            List<GameObject> objectList = new List<GameObject>();
+            if (storyObjects != null && sceneObjects != null) {
+
+                foreach (string objectName in storyObjects) {
+
+                    var item = sceneObjects.Find(e => e.name.Equals(objectName, StringComparison.CurrentCultureIgnoreCase));
+                    if (item != null)
+                        objectList.Add(item);
+                }
+
+                if (currentStory != null &&
+                ( currentStory.sceneObjects.Count == objectList.Count && currentStory.sceneObjects[0] == objectList[0] ) &&
+                currentStory.location.Equals(CorrectLocation) && currentStory.mood == mood) {
+                    jsonGrab = null;
+                    yield return jsonGrab;
+
+
+                }
+                else {
+                    ////Why was it Passed
+                    //if (currentStory != null) {
+                    //    Debug.Log(currentStory.sceneObjects.Count == objectList.Count);
+                    //    Debug.Log(currentStory.sceneObjects[0] == objectList[0]);
+                    //    Debug.Log(currentStory.location.Equals(CorrectLocation));
+                    //    Debug.Log(currentStory.mood == mood);
+                    //}
+
+
+
+                    string setting = "Day";
+                    if (CheckWords.StringContains(story["Description"] as string, "day", StringComparison.CurrentCultureIgnoreCase))
+                        setting = "Day";
+                    else if (CheckWords.StringContains(story["Description"] as string, "night", StringComparison.CurrentCultureIgnoreCase))
+                        setting = "Night";
+                    currentStory = new Story(story["Description"] as string, 0, mood, CorrectLocation, setting, objectList);
+                    onCreatedStory.Invoke(currentStory);
+                    jsonGrab = null;
+                }
             }
         }
     }

@@ -21,11 +21,21 @@ IGvrGazeResponder {
     Image button;
     [SerializeField]
     Color StartColor;
+    Color init;
+    string startText;
 	// Use this for initialization
 	void Start () {
         button = GetComponent<Image>();
+        init = button.color;
+        startText = textUI.text;
 	}
-	
+    public void Reset() {
+        button.color = init;
+        timeSelected = 0;
+        Progress.fillAmount = 0;
+        Clicked = false;
+        textUI.text = startText;
+    }
 	// Update is called once per frame
 	void Update () {
         if (Clicked)
