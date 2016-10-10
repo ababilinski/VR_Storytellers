@@ -99,6 +99,9 @@ public class Client : MonoBehaviour {
                 break;
 
             }
+
+           
+
         }
         if (string.IsNullOrEmpty(CorrectLocation)) {
             jsonGrab = null;
@@ -106,7 +109,11 @@ public class Client : MonoBehaviour {
             onStoryNotFound.Invoke();
         }
         else {
-
+            string _setting = "Day";
+            if (CheckWords.StringContains(story["Description"] as string, "day", StringComparison.CurrentCultureIgnoreCase))
+                _setting = "Day";
+            else if (CheckWords.StringContains(story["Description"] as string, "night", StringComparison.CurrentCultureIgnoreCase))
+                _setting = "Night";
 
             //TODO: Add more emotions and adjust current spelling to match Watson API
             string mood = Story.ConvertMood(story["Mood"] as string);
@@ -128,7 +135,7 @@ public class Client : MonoBehaviour {
 
                 if (currentStory != null &&
                 ( currentStory.sceneObjects.Count == objectList.Count && currentStory.sceneObjects[0] == objectList[0] ) &&
-                currentStory.location.Equals(CorrectLocation) && currentStory.mood == mood) {
+                currentStory.location.Equals(CorrectLocation) && currentStory.mood == mood && currentStory.setting.Equals(_setting)) {
                     jsonGrab = null;
                     yield return jsonGrab;
 
@@ -142,8 +149,8 @@ public class Client : MonoBehaviour {
                     //    Debug.Log(currentStory.location.Equals(CorrectLocation));
                     //    Debug.Log(currentStory.mood == mood);
                     //}
-
-
+                    if(currentStory!=null)
+                    Debug.Log(currentStory.setting.Equals(_setting));
 
                     string setting = "Day";
                     if (CheckWords.StringContains(story["Description"] as string, "day", StringComparison.CurrentCultureIgnoreCase))
