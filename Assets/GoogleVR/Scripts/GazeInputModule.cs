@@ -67,9 +67,15 @@ public class GazeInputModule : BaseInputModule {
 
   /// @cond
   public override bool ShouldActivateModule() {
-    bool activeState = base.ShouldActivateModule();
 
-    activeState = activeState && (GvrViewer.Instance.VRModeEnabled || !vrModeOnly);
+    bool isVrModeEnabled = !vrModeOnly;
+#if UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
+    isVrModeEnabled |= VRSettings.enabled;
+#else
+    isVrModeEnabled |= GvrViewer.Instance.VRModeEnabled;
+#endif  // UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
+
+    bool activeState = base.ShouldActivateModule() && isVrModeEnabled;
 
     if (activeState != isActive) {
       isActive = activeState;
@@ -109,10 +115,12 @@ public class GazeInputModule : BaseInputModule {
     UpdateCurrentObject();
     UpdateReticle(gazeObjectPrevious);
 
-    bool handlePendingClickRequired =
-      !GvrViewer.Instance.Triggered && !Input.GetMouseButton(0);
+    bool isGvrTriggered = Input.GetMouseButtonDown(0);
+    bool handlePendingClickRequired = !Input.GetMouseButton(0);
+
 #if UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
     handlePendingClickRequired &= !GvrController.ClickButton;
+    isGvrTriggered |= GvrController.ClickButtonDown;
 #endif  // UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
 
     // Handle input
@@ -121,7 +129,7 @@ public class GazeInputModule : BaseInputModule {
     } else if (Time.unscaledTime - pointerData.clickTime < clickTime) {
       // Delay new events until clickTime has passed.
     } else if (!pointerData.eligibleForClick &&
-        (GvrViewer.Instance.Triggered || Input.GetMouseButtonDown(0))) {
+        (isGvrTriggered || Input.GetMouseButtonDown(0))) {
       // New trigger action.
       HandleTrigger();
     } else if (handlePendingClickRequired) {
@@ -132,7 +140,14 @@ public class GazeInputModule : BaseInputModule {
   /// @endcond
 
   private void CastRayFromGaze() {
-    Vector2 headPose = NormalizedCartesianToSpherical(GvrViewer.Instance.HeadPose.Orientation * Vector3.forward);
+    Quaternion headOrientation;
+#if UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
+    headOrientation = InputTracking.GetLocalRotation(VRNode.Head);
+#else
+    headOrientation = GvrViewer.Instance.HeadPose.Orientation;
+#endif  // UNITY_HAS_GOOGLEVR && (UNITY_ANDROID || UNITY_EDITOR)
+
+    Vector2 headPose = NormalizedCartesianToSpherical(headOrientation * Vector3.forward);
 
     if (pointerData == null) {
       pointerData = new PointerEventData(eventSystem);
